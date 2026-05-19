@@ -57,8 +57,8 @@ export default function WelcomePage() {
       <footer className="welcome-footer">
         <FooterLink href="https://monitoringinnovation.com/">MONITORINGINNOVATION</FooterLink>
         <FooterLink href="https://gpscontrol.co/">GPS CONTROL</FooterLink>
-        <FooterLink href="https://github.com/TU_USUARIO/REPO_FRONT">Link repo front</FooterLink>
-        <FooterLink href="https://github.com/TU_USUARIO/REPO_BACK">Link repo back</FooterLink>
+        <FooterLink href="https://github.com/Mava1521/AutoManager_Front">Link repo front</FooterLink>
+        <FooterLink href="https://github.com/Mava1521/AutoManager_Back">Link repo back</FooterLink>
       </footer>
     </div>
   );
