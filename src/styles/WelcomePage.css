@@ -1,0 +1,264 @@
+/* ================================================================
+   WelcomePage.css
+   - Círculo gigante (media luna) que cruza toda la pantalla
+   - Va de derecha → izquierda en loop infinito
+   - Nunca se devuelve: desaparece por la izquierda y
+     reaparece por la derecha sin pausa visible
+================================================================ */
+
+.welcome-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  overflow: hidden; /* clave: oculta el arco fuera de pantalla */
+}
+
+/* ── Header ── */
+.welcome-header {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.4rem;
+  right: 1.4rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.welcome-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.welcome-logout-btn {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #666;
+  background: transparent;
+  border: 1.5px solid #ddd;
+  border-radius: 20px;
+  padding: 0.3rem 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.welcome-logout-btn:hover {
+  border-color: #c6007e;
+  color: #c6007e;
+}
+
+/* ══════════════════════════════════════════════════════
+   CÍRCULO GIGANTE — media luna que cruza toda la pantalla
+   
+   Tamaño: 130vh × 130vh → siempre más alto que la pantalla
+   Empieza: completamente fuera a la derecha
+   Termina:  completamente fuera a la izquierda
+   Loop:     infinite — cuando desaparece por la izq,
+             reaparece por la der sin que se note el corte
+══════════════════════════════════════════════════════ */
+.welcome-circles {
+  position: absolute;
+  top: 50%;
+  /* El contenedor arranca fuera a la derecha */
+  left: 100%;
+  transform: translateY(-50%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.welcome-circle {
+  /*
+    130vh de diámetro → mucho más alto que la pantalla.
+    Así solo se ve el arco lateral = media luna perfecta.
+  */
+  width:  130vh;
+  height: 130vh;
+  border-radius: 50%;
+
+  /*
+    Borde con gradiente simulado:
+    color gris suave con ligero tono azul/violeta
+    igual al que se ve en las fotos.
+  */
+  border: 2.5px solid rgba(180, 190, 220, 0.55);
+
+  /*
+    La animación mueve el CONTENEDOR (left: 100%)
+    desde fuera-derecha hasta fuera-izquierda.
+    Distancia total = 100vw + 130vh (ancho del círculo)
+  */
+  animation: moonCross 6s linear infinite;
+}
+
+@keyframes moonCross {
+  /*
+    0%: el borde izquierdo del círculo está en el borde
+        derecho de la pantalla → solo se ve el arco.
+    100%: el borde derecho del círculo sale por la izquierda.
+
+    translateX(0)      = círculo en posición inicial (der)
+    translateX(-200vw) = círculo completamente fuera (izq)
+
+    Como es infinite y linear, en cuanto termina
+    vuelve a empezar desde la derecha sin rebote.
+  */
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  8% {
+    /* Aparece suavemente */
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(calc(-200vw - 130vh));
+    opacity: 0;
+  }
+}
+
+/* ── Main ── */
+.welcome-main {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Imagen del teléfono centrada */
+.welcome-phone {
+  width: min(420px, 58vw);
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  animation: fadeInPhone 0.8s ease both;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.06));
+}
+
+@keyframes fadeInPhone {
+  from { opacity: 0; transform: scale(0.97) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Texto superpuesto sobre la imagen */
+.welcome-text {
+  position: absolute;
+  z-index: 4; /* encima del círculo */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.welcome-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05em;
+  line-height: 1.0;
+}
+
+.welcome-line1 {
+  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+  font-weight: 800;
+  color: #00249c;
+  letter-spacing: 0.06em;
+  animation: fadeUp 0.6s ease both;
+}
+
+.welcome-line2 {
+  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+  font-weight: 800;
+  color: #00249c;
+  letter-spacing: 0.06em;
+  animation: fadeUp 0.6s 0.12s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Botón dashboard ── */
+.welcome-dashboard-btn {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #c6007e, #e280be);
+  border: none;
+  border-radius: 25px;
+  padding: 0.75rem 2.2rem;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 18px rgba(198, 0, 126, 0.28);
+  animation: fadeUp 0.6s 0.24s ease both;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.welcome-dashboard-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(198, 0, 126, 0.35);
+}
+
+.welcome-dashboard-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Footer ── */
+.welcome-footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: 1rem 2rem 1.4rem;
+  flex-wrap: wrap;
+}
+
+.welcome-footer-link {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #01BEDB;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+
+.welcome-footer-link:hover {
+  opacity: 0.65;
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .welcome-line1,
+  .welcome-line2 { font-size: 1.8rem; }
+  .welcome-phone { width: 80vw; }
+}
+
+@media (max-width: 480px) {
+  .welcome-line1,
+  .welcome-line2 { font-size: 1.4rem; }
+  .welcome-footer { gap: 1rem; }
+  .welcome-footer-link { font-size: 0.58rem; }
+}

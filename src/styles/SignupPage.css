@@ -1,0 +1,280 @@
+/* ================================================================
+   SignupPage.css
+   Overlay rosa/magenta diferencia esta pantalla del Login y Recovery
+================================================================ */
+
+.signup-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: "Montserrat", sans-serif;
+  overflow: hidden;
+}
+
+/* Foto de fondo */
+.signup-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Overlay rosa-magenta (diferenciador de esta pantalla) */
+.signup-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(226, 128, 190, 0.50);
+  z-index: 1;
+}
+
+/* ── Card ── */
+.signup-card {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.4rem 2.6rem 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 40px rgba(198, 0, 126, 0.13);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  animation: fadeIn 0.4s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Logo (reutiliza clases de RecoveryPage / login) ── */
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.auth-logo img {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.auth-logo-divider {
+  width: 1.5px;
+  height: 42px;
+  background: #c5c5c5;
+  border-radius: 2px;
+}
+
+.auth-logo-text {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.01em;
+}
+
+/* ── Error ── */
+.auth-error {
+  background: #fce8f3;
+  border-left: 3px solid #c6007e;
+  color: #8a0058;
+  font-size: 0.8rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 6px;
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-5px); }
+  75%       { transform: translateX(5px); }
+}
+
+/* ── Fila Nombre + Apellido ── */
+.signup-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ── Campos genéricos ── */
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.auth-field label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #555;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.auth-field input {
+  border: none;
+  border-bottom: 1.5px solid #c5c5c5;
+  border-radius: 0;
+  padding: 0.4rem 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.88rem;
+  color: #333;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.auth-field input::placeholder {
+  color: #c5c5c5;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
+.auth-field input:focus {
+  border-bottom-color: #e280be;
+}
+
+/* ── Nombre con el "+" del Figma ── */
+.signup-name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.signup-name-wrapper input {
+  flex: 1;
+}
+
+.signup-plus {
+  font-size: 1.1rem;
+  color: #c5c5c5;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+/* ── Input con ícono ojo ── */
+.signup-input-eye {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.signup-input-eye input {
+  padding-right: 2rem;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.eye-btn:focus-visible {
+  outline: 2px solid #40cee4;
+  border-radius: 3px;
+}
+
+/* ── Términos ── */
+.signup-terms {
+  font-size: 0.72rem;
+  color: #888;
+  line-height: 1.5;
+  margin: 0.4rem 0 0;
+  text-align: center;
+}
+
+.signup-terms a {
+  color: #40cee4;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-terms a:hover {
+  text-decoration: underline;
+}
+
+/* ── Fila de botones: ← Volver  |  Registrar ── */
+.signup-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+}
+
+/* Botón ← Volver (pill rosa relleno) */
+.auth-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1.4rem;
+  background: linear-gradient(90deg, #c6007e, #e280be);
+  border: none;
+  border-radius: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.auth-back-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* Botón Registrar (pill outline) */
+.auth-pill-btn {
+  padding: 0.5rem 1.8rem;
+  background: transparent;
+  border: 1.5px solid #888;
+  border-radius: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.auth-pill-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #c6007e, #e280be);
+  border-color: transparent;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.auth-pill-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .signup-card {
+    margin: 1rem;
+    padding: 2rem 1.4rem 1.6rem;
+  }
+
+  .signup-row {
+    grid-template-columns: 1fr;
+  }
+}

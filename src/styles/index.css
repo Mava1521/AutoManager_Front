@@ -1,0 +1,89 @@
+/* ==========================================================================
+   1. VARIABLES DE SISTEMA (Design Tokens)
+   Esto permite que toda la app se actualice cambiando solo estos valores
+   ========================================================================== */
+:root {
+  --color-primary:   #00249C; /* Azul Corporativo */
+  --color-primary-dark: #172554;
+  --color-accent:    #C6007E; /* Rosa Corporativo */
+  --color-bg-body:   #f3f4f6;
+  --color-text-main: #1f2937;
+  --color-white:     #ffffff;
+  
+  --radius-base:     6px;
+  --font-main:       'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition-fast: 0.2s ease;
+}
+
+/* ==========================================================================
+   2. RESET 
+   ========================================================================== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg-body);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ==========================================================================
+   3. ANIMACIONES (Keyframes)
+   ========================================================================== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px); }
+}
+
+/* ==========================================================================
+   4. CLASES DE UTILIDAD (Design System)
+   ========================================================================== */
+.animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+.animate-shake   { animation: shake 0.3s ease-in-out; }
+
+.w-full { width: 100%; }
+
+/* Botón corporativo escalable */
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  transition: background-color var(--transition-fast);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Utilidad para inputs globales */
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-base);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.input-field:focus {
+  border-color: var(--color-primary);
+}

@@ -1,0 +1,121 @@
+
+.home-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  overflow: hidden; /* Evita scrolls accidentales por las animaciones */
+}
+
+/* ─── Layout y Header ────────────────────────────────────────── */
+.home-header {
+  position: absolute;
+  top: 1.4rem;
+  left: 1.6rem;
+  z-index: 10;
+}
+
+.home-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+/* ─── Animación de círculos (Optimizado con will-change) ─────── */
+.home-circles {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 120px;
+  z-index: 5;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.home-circle {
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  transform: translateX(55px);
+  opacity: 0;
+  /* Rendimiento: previene parpadeos durante la animación */
+  will-change: transform, opacity; 
+  animation: slideCircle 3.2s ease-in-out infinite;
+}
+
+@keyframes slideCircle {
+  0% { transform: translateX(90px); opacity: 0; }
+  20% { opacity: 1; }
+  50% { transform: translateX(55px); opacity: 0.6; }
+  80% { opacity: 1; }
+  100% { transform: translateX(20px); opacity: 0; }
+}
+
+/* ─── Main y Tipografía ─────────────────────────────────────── */
+.home-main {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  contain: layout; /* Optimización de performance */
+}
+
+.home-phone {
+  width: min(520px, 70vw);
+  object-fit: contain;
+  animation: fadeInPhone 0.9s ease both;
+  z-index: 1;
+}
+
+.home-title {
+  margin: 0;
+  line-height: 1.05;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  color: #00249c;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.home-title-line1,
+.home-title-line2 {
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  animation: fadeUp 0.7s ease both;
+}
+
+.home-title-line2 { animation-delay: 0.15s; }
+
+/* ─── Footer (Flexbox robusto) ─────────────────────────────── */
+.home-footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding: 1.2rem 2rem 1.6rem;
+  flex-wrap: wrap;
+}
+
+.home-footer-link {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #c6007e;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: opacity var(--chat-transition, 0.2s);
+}
+
+.home-footer-link:hover { opacity: 0.65; text-decoration: underline; }
+
+/* ─── Responsive (Escalabilidad) ──────────────────────────── */
+@media (max-width: 600px) {
+  .home-title-line1, .home-title-line2 { font-size: 2rem; }
+  .home-phone { width: 85vw; }
+}
